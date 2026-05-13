@@ -1,5 +1,6 @@
 async function afficherCookies(){
-    const dataCo = await getCo();
+    //Cookies avec img
+    const dataCo = await getCo('https://lograna.onrender.com/cookies');
     for(let i = 0; i<dataCo.length; i++){
     const div = document.createElement("div");
     div.className = "spe";
@@ -17,13 +18,30 @@ async function afficherCookies(){
     div.appendChild(prix);
     div.appendChild(img);
     }
+    ///cookkies sans img
+    const dataCor = await getCo('https://lograna.onrender.com/cookiesr')
+        for(let i = 0; i<dataCor.length; i++){
+    const divr = document.createElement("div");
+    divr.className = "spe";
+    document.getElementById("par").appendChild(div);
+    const Ncor = document.createElement("h3");
+    const descr = document.createElement("h3");
+    const prixr = document.createElement("h3");
+    const hr = document.createElement("hr");
+    Ncor.textContent = "Nom du cookie : " + dataCor[i].Nco;
+    descr.textContent = dataCor[i].desc;
+    prixr.textContent = "Ce cookie coûte " + dataCor[i].prix + " €";
+    divr.appendChild(Ncor);
+    divr.appendChild(descr);
+    divr.appendChild(prixr);
+    divr.appendChild(hr);
+    }
 }
 
 afficherCookies();
 
 
-async function getCo(){
-    const url = 'https://lograna.onrender.com/cookies';
+async function getCo(url){
         try {
         const response = await fetch(url, {
             method: 'GET',

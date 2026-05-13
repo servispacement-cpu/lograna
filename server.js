@@ -32,12 +32,18 @@ const Schemac = new mongoose.Schema({
   photo: String,
 });
 
- 
+
+const Schemacr = new mongoose.Schema({
+  Nco: String,
+  desc: String,
+  prix: Number,
+  photo: String,
+});
 
 // Define a model based on the schema
 
-const Itemc = mongoose.model('Itemb', Schemac);
-
+const Itemc = mongoose.model('Itemc', Schemac);
+const Itemcr = mongoose.model('Itemcr', Schemacr);
  
 
 // Define routes
@@ -47,7 +53,11 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 app.post('/cookies', async (req, res) => {
   try {
+    if (req.body.photo){
  const item = new Itemc(req.body);
+    } else {
+      const item = new Itemcr(req.body);
+    }
   await item.save();
   res.json(item);
   } catch (error){
@@ -57,8 +67,13 @@ app.post('/cookies', async (req, res) => {
 });
 
 app.get('/cookies', async (req, res) => {
-  const items = await Itemc.find();  
-  res.json(items);
+  const itemsc = await Itemc.find();
+  res.json(itemsc);
+});
+
+app.get('/cookiesr', async (req, res) => {
+  const itemscr = await Itemcr.find();
+  res.json(itemscr);
 });
 
 
