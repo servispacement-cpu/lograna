@@ -3,9 +3,10 @@ async function createCookie(event){
         Nco : document.getElementById("Ncookie").value,
         desc : document.getElementById("descCookie").value,
         prix : document.getElementById("pCookie").value,
-        photo: document.getElementById("canvas").toDataURL("image/png"),
+        photo: document.getElementById("canvas").toDataURL("image/jpeg", 0.2),
     };
     event.preventDefault();
+    console.log(cookie.photo.length);
     const url = 'https://lograna.onrender.com/cookies';
     try {
         const response = await fetch(url, {

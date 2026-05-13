@@ -29,6 +29,7 @@ const Schemac = new mongoose.Schema({
   Nco: String,
   desc: String,
   prix: Number,
+  photo: String,
 });
 
  
