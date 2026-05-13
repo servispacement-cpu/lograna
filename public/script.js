@@ -18,7 +18,7 @@ afficherCookies();
 
 
 async function getCo(){
-    const url = "lograna.onrender.com/cookies";
+    const url = 'https://flygana.onrender.com/cookies';
         try {
         const response = await fetch(url, {
             method: 'GET',
