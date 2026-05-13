@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>Gestionnaire de cookies</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div>
+            <h1>Gestion du comerce Lograna :</h1>
+        </div>
+        <div>
+            <h1>Créer un cookie :</h1>
+            <form>
+                <label>Entrez le nom du cookie :</label><input type="text" id="Ncookie"><br><br>
+                <label>Entrez la description du cookie :</label><input type="text" id="descCookie"><br><br>
+                <label>Entrez le prix du cookie :</label><input type="number" id="pCookie"><br><br>
+                <label id="labvid">Prenez une photo du cookie :</label>
+                <video id="video" autoplay muted playsinline></video>
+                <canvas id="canvas"> </canvas>
+                <button type="button" onclick="photo()">Prendre une photo</button>
+                <button onclick="createCookie(event)">Créer le cookie</button>
+            </form>
+        </div>
+        <div>
+            <h1>Masquer un cookie dans l'interface client :</h1><br><br>
+            <form>
+                <select id="selmas"></select><br><br>
+                <button onclick="masquerCookie()">Masquer le cookie</button>
+            </form>
+        </div>
+    
+    <script src="scriptG.js"></script>
+    </body>
+</html>

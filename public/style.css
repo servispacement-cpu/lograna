@@ -6,3 +6,55 @@
 	border-radius: 20px;
 	text-align: center;
 }
+
+input{
+    border: 4px outset white;
+    border-radius: 25px;
+    padding: 5px;
+    background-color: rgb(255, 145, 0);
+}
+
+
+html{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+img{
+    width: 40%;
+    height: 40%;
+    border: 5px outset black;
+    border-radius: 15px;
+}
+
+
+
+select {
+    background-color: rgb(255, 145, 0);
+    border: 5px outset black;
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+
+button{
+	background-color: rgb(255, 145, 0);
+    border: 5px outset black;
+    color: white;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+
+video{
+    width: 500px;
+    border-radius: 10px;
+    border: 2px solid black;
+}
+
+canvas{
+	display: none;
+    width: 500px;
+    border-radius: 10px;
+    border: 2px solid black;
+}
