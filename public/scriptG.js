@@ -18,6 +18,7 @@ async function createCookie(event){
         if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
 
         const data = await response.json();
+        if (data){alert("Votre cookie a bien été crée")}
         console.log('Réponse du serveur :', data);
     } catch (error) {
         console.error('Erreur :', error);
