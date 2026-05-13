@@ -1,6 +1,17 @@
 	div{
 	background-color: #D8A56D;
-	border: 5px outset black;
+	border: 5px outset #6B3E26;
+	color: #6B3E26;
+	padding: 30px;
+	margin: 15px;
+	border-radius: 20px;
+	text-align: center;
+}
+
+.spe{
+	background-color: #6B3E26;
+	border: 5px outset white;
+	color: white;
 	padding: 30px;
 	margin: 15px;
 	border-radius: 20px;
@@ -11,7 +22,7 @@ input{
     border: 4px outset white;
     border-radius: 25px;
     padding: 5px;
-    background-color: rgb(255, 145, 0);
+    background-color: #6B3E26;
 }
 
 
@@ -29,7 +40,7 @@ img{
 
 
 select {
-    background-color: rgb(255, 145, 0);
+    background-color: #6B3E26;
     border: 5px outset black;
     color: white;
     border-radius: 5px;
@@ -38,7 +49,7 @@ select {
 
 
 button{
-	background-color: rgb(255, 145, 0);
+	background-color: #6B3E26;
     border: 5px outset black;
     color: white;
     border-radius: 15px;

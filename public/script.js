@@ -2,6 +2,7 @@ async function afficherCookies(){
     const dataCo = await getCo();
     for(let i = 0; i<dataCo.length; i++){
     const div = document.createElement("div");
+    div.className = "spe";
     document.getElementById("par").appendChild(div);
     const Nco = document.createElement("h3");
     const desc = document.createElement("h3");
