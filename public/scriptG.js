@@ -3,7 +3,7 @@ async function createCookie(event){
         Nco : document.getElementById("Ncookie").value,
         desc : document.getElementById("descCookie").value,
         prix : document.getElementById("pCookie").value,
-        photo: document.getElementById("canvas").toDataURL("image/jpeg", 0.2),
+        photo: document.getElementById("canvas").toDataURL("image/jpeg", 0.5),
     };
     event.preventDefault();
     console.log(cookie.photo.length);
