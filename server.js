@@ -53,7 +53,12 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 app.post('/cookies', async (req, res) => {
   try {
-  const item = new Itemc(req.body);    
+    let item;
+    if (req.body.photo){
+      item = new Itemc(req.body); 
+    } else {
+      item = new Itemcr(req.body);
+    } 
   await item.save();
   res.json(item);
   } catch (error){
