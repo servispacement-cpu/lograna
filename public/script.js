@@ -23,18 +23,16 @@ async function afficherCookies(){
         for(let i = 0; i<dataCor.length; i++){
     const divr = document.createElement("div");
     divr.className = "spe";
-    document.getElementById("par").appendChild(div);
+    document.getElementById("par").appendChild(divr);
     const Ncor = document.createElement("h3");
     const descr = document.createElement("h3");
     const prixr = document.createElement("h3");
-    const hr = document.createElement("hr");
     Ncor.textContent = "Nom du cookie : " + dataCor[i].Nco;
     descr.textContent = dataCor[i].desc;
     prixr.textContent = "Ce cookie coûte " + dataCor[i].prix + " €";
     divr.appendChild(Ncor);
     divr.appendChild(descr);
     divr.appendChild(prixr);
-    divr.appendChild(hr);
     }
 }
 
