@@ -13,11 +13,12 @@
                 <label>Entrez le nom du cookie :</label><input type="text" id="Ncookie"><br><br>
                 <label>Entrez la description du cookie :</label><input type="text" id="descCookie"><br><br>
                 <label>Entrez le prix du cookie :</label><input type="number" id="pCookie"><br><br>
-                <label id="labvid">Prenez une photo du cookie :</label>
+                <label id="labvid">Prenez une photo du cookie (facultatifs):</label>
                 <video id="video" autoplay muted playsinline></video>
                 <canvas id="canvas"> </canvas>
-                <button type="button" onclick="photo()">Prendre une photo</button>
-                <button onclick="createCookie(event)">Créer le cookie</button>
+                <button type="button" onclick="photo()">Prendre une photo</button> <br><br>
+                <button onclick="createCookie(event)">Créer le cookie avec photo</button><br><br>
+                <button onclick="createCookier(event)">Créer le cookie sans photo</button><br><br>
             </form>
         </div>
         <div>

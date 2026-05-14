@@ -1,4 +1,4 @@
-async function createCookie(event){
+function createCookie(event){
     const cookie = {
         Nco : document.getElementById("Ncookie").value,
         desc : document.getElementById("descCookie").value,
@@ -6,8 +6,21 @@ async function createCookie(event){
         photo: document.getElementById("canvas").toDataURL("image/jpeg", 0.5),
     };
     event.preventDefault();
-    console.log(cookie.photo.length);
-    const url = 'https://lograna.onrender.com/cookies';
+    post(cookie, 'https://lograna.onrender.com/cookies');
+}
+
+function createCookier(event){
+    const cookie = {
+        Nco : document.getElementById("Ncookie").value,
+        desc : document.getElementById("descCookie").value,
+        prix : document.getElementById("pCookie").value,
+    };
+    event.preventDefault();
+    post(cookie, 'https://lograna.onrender.com/cookiesr');
+}
+
+
+    async function post(cookie, url){
     try {
         const response = await fetch(url, {
             method: 'POST',
@@ -44,16 +57,12 @@ function photo(){
     const video = document.getElementById("video");
     const canvas = document.getElementById("canvas");
     const ctx = canvas.getContext("2d");
-        if (video.readyState < 2) {
-      console.warn("Vidéo pas encore prête");
-      return;
-    }
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
-canvas.style.display = "block";
-ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-video.style.display = "none";
-document.getElementById("labvid").innerHTML = "Voici la photo du cookie :"
+    canvas.style.display = "block";
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    video.style.display = "none";
+    document.getElementById("labvid").innerHTML = "Voici la photo du cookie :"
 }
  catch (error) {
     console.error(error);

@@ -51,14 +51,12 @@ app.use(cors());
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
+
+/////////////////////Cookies avec photo
+
 app.post('/cookies', async (req, res) => {
   try {
-    let item;
-    if (req.body.photo){
-      item = new Itemc(req.body); 
-    } else {
-      item = new Itemcr(req.body);
-    } 
+  const item = new Itemc(req.body); 
   await item.save();
   res.json(item);
   } catch (error){
@@ -71,6 +69,20 @@ app.get('/cookies', async (req, res) => {
   const itemsc = await Itemc.find();
   res.json(itemsc);
 });
+
+/////////////////////Cookies sans photo
+
+app.post('/cookiesr', async (req, res) => {
+  try {
+  const item = new Itemcr(req.body); 
+  await item.save();
+  res.json(item);
+  } catch (error){
+    console.error(error);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+});
+
 
 app.get('/cookiesr', async (req, res) => {
   const itemscr = await Itemcr.find();
