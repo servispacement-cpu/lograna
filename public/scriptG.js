@@ -79,9 +79,7 @@ function photo(){
 //////////////////////////////////////////////////Masq cookies
 
 async function afficherCookies(){
-    const cookiesc = await getCo('https://lograna.onrender.com/cookies');
-    const cookiesr = await getCo('https://lograna.onrender.com/cookiesr');
-    const cookies = [...cookiesc, ...cookiesr];
+    const cookies = await getCo()
     for (let i = 0; i<cookies.length; i++){
         const opt = document.createElement("option");
         opt.textContent = cookies[i].Nco;
@@ -93,7 +91,8 @@ async function afficherCookies(){
 
 
 
-async function getCo(url){
+async function getCo(){
+    const url = 'https://lograna.onrender.com/cookies';
         try {
         const response = await fetch(url, {
             method: 'GET',
