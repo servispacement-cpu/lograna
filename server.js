@@ -33,10 +33,17 @@ const Schemac = new mongoose.Schema({
   photo: String,
 });
 
+const Schemares = new mongoose.Schema({
+  nom: String,
+  adresse: String,
+  cookies: Array,
+});
+
 // Define a model based on the schema
 
 const Itemc = mongoose.model('Itemc', Schemac);
 const Itemcm = mongoose.model('Itemcm', Schemac);
+const Itemres = mongoose.model('Itemres', Schemares);
 
 // Define routes
 app.use(cors()); 
@@ -77,6 +84,27 @@ app.post('/masqucookie/:Nco', async (req, res) => {
     console.error(error);
     res.status(500).json({ error: "Erreur serveur" });
   }
+});
+
+
+
+
+/////Reservation
+app.post('/res', async (req, res) => {
+  try {
+  const item = new Itemres(req.body); 
+  await item.save();
+  res.json(item);
+  } catch (error){
+    console.error(error);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+});
+
+
+app.get('/res', async (req, res) => {
+  const itemsc = await Itemres.find();
+  res.json(itemsc);
 });
 
 

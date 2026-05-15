@@ -31,10 +31,15 @@ async function afficherCookies(){
     }
     div.appendChild(hr);
 
-    const opt = document.createElement("option");
+    const opt = document.createElement("input");
+    const lab = document.createElement("label");
     const br = document.createElement("br");
-    opt.textContent = dataCo[i].Nco + " de la catégorie " + dataCo[i].cat
+    opt.type = "checkbox";
+    opt.name = "cookies"
+    opt.value = dataCo[i].Nco
+    lab.textContent = dataCo[i].Nco + " de la catégorie " + dataCo[i].cat
     document.getElementById("resco").appendChild(opt);
+    document.getElementById("resco").appendChild(lab);
     document.getElementById("resco").appendChild(br);
     }
 }
@@ -64,10 +69,27 @@ async function getCo(){
 ///////////////////// Reserv cookies
 
 
-function rescookies(){
+function rescookies(event){
+    event.preventDefault();
     const res = {
         nom: document.getElementById("nom").value,
         adresse: document.getElementById("adresse").value,
-        cookies ,
+        cookies: Array.from(document.querySelectorAll('input[name="cookies"]:checked')).map(cb => cb.value),
+    }
+    console.log(res)
+    const url = 'https://lograna.onrender.com/res';
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(res)
+        });
+
+        if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
+
+        const data = await response.json();
+        console.log('Réponse du serveur :', data);
+    } catch (error) {
+        console.error('Erreur :', error);
     }
 }
