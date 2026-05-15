@@ -69,14 +69,13 @@ async function getCo(){
 ///////////////////// Reserv cookies
 
 
-function rescookies(event){
+async function rescookies(event){
     event.preventDefault();
     const res = {
         nom: document.getElementById("nom").value,
         adresse: document.getElementById("adresse").value,
         cookies: Array.from(document.querySelectorAll('input[name="cookies"]:checked')).map(cb => cb.value),
     }
-    console.log(res)
     const url = 'https://lograna.onrender.com/res';
     try {
         const response = await fetch(url, {
@@ -88,6 +87,7 @@ function rescookies(event){
         if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
 
         const data = await response.json();
+        if(data){alert("Votre commande a été enregistrée ! Nous vous prierons de payer le livreur.")}
         console.log('Réponse du serveur :', data);
     } catch (error) {
         console.error('Erreur :', error);

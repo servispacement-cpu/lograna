@@ -24,6 +24,8 @@ function createCookier(event){
 }
 
 async function post(cookie){
+    const invalidNco = (await getCo()).some(c => c.Nco === cookie.Nco);
+    if (invalidNco){alert("Ce nom de cookie existe déjà. Veuillez en saisir un autre."); return;}
     const url = 'https://lograna.onrender.com/cookies';
     try {
         const response = await fetch(url, {
@@ -128,3 +130,48 @@ async function masquerCookie(){
         console.error('Erreur :', error);
     }
 }
+
+
+
+
+/////////////////////Res
+
+async function getRes(){
+        const url = 'https://lograna.onrender.com/res';
+        try {
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        });
+
+        if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
+        const data = await response.json();
+        console.log(data);
+        return (data);
+    } catch (error) {
+        console.error('Erreur :', error);
+        throw error;
+    } 
+}
+
+
+async function afficherRes(){
+    const res = await getRes();
+    const par = document.getElementById("par")
+    for (let i =0; i<res.length; i++){
+    const nom = document.createElement("h3");
+    const adresse = document.createElement("h3");
+    const cookies = document.createElement("h3");
+    const hr = document.createElement("hr");
+    nom.textContent = "Nom du client : " + res[i].nom;
+    adresse.textContent = "Adresse de livraison : " + res[i].adresse;
+    cookies.textContent = "Contenu de la commande : " + res[i].cookies;
+    par.appendChild(nom);
+    par.appendChild(adresse);
+    par.appendChild(cookies);
+    par.appendChild(hr);
+    }
+}
+
+
+afficherRes();
