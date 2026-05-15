@@ -118,6 +118,7 @@ async function masquerCookie(){
         });
         if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
         const data = await response.json();
+        if (data){alert("Votre cookie a bien été masqué")}
         console.log('Réponse du serveur :', data);
     } catch (error) {
         console.error('Erreur :', error);
@@ -136,6 +137,7 @@ async function demasquerCookie(){
         });
         if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
         const data = await response.json();
+        if (data){alert("Votre cookie a bien été démasqué")}
         console.log('Réponse du serveur :', data);
     } catch (error) {
         console.error('Erreur :', error);
