@@ -7,6 +7,7 @@ function createCookie(event){
         desc : document.getElementById("descCookie").value,
         prix : document.getElementById("pCookie").value,
         photo: document.getElementById("canvas").toDataURL("image/jpeg", 0.5),
+        affichable: true,
     };
     event.preventDefault();
     post(cookie);
@@ -18,6 +19,7 @@ function createCookier(event){
         Nco : document.getElementById("Ncookie").value,
         desc : document.getElementById("descCookie").value,
         prix : document.getElementById("pCookie").value,
+        affichable: true,
     };
     event.preventDefault();
     post(cookie);
@@ -81,7 +83,7 @@ function photo(){
 //////////////////////////////////////////////////Masq cookies
 
 async function afficherCookies(){
-    const cookies = await getCo()
+    const cookies = await getCo('https://lograna.onrender.com/cookies')
     for (let i = 0; i<cookies.length; i++){
         const opt = document.createElement("option");
         opt.textContent = cookies[i].Nco;
@@ -89,12 +91,23 @@ async function afficherCookies(){
         document.getElementById("selmas").appendChild(opt);
     }
 }
+afficherCookies();
+
+async function affMasquCookies(){
+    const dataCo = await getCo('https://lograna.onrender.com/medCookies')
+    for (let i = 0; i<dataCo.length ; i++){
+        const bt = document.createElement("button");
+        bt.textContent = "Démasquer " + data[i].Nco;
+        bt.onclick = demasquerCookie;
+        document.getElementById("masq").appendChild(bt)
+    }
+}
+
+affMasquCookies();
 
 
 
-
-async function getCo(){
-    const url = 'https://lograna.onrender.com/cookies';
+async function getCo(url){
         try {
         const response = await fetch(url, {
             method: 'GET',
@@ -111,9 +124,7 @@ async function getCo(){
     } 
 }
 
-afficherCookies();
-
-
+/////requetes
 
 async function masquerCookie(){
     const cookie = document.getElementById("selmas").value;
@@ -129,9 +140,25 @@ async function masquerCookie(){
     } catch (error) {
         console.error('Erreur :', error);
     }
+
+}   
+
+
+async function demasquerCookie(){
+    const cookie = document.getElementById("selmas").value;
+    const url = `https://lograna.onrender.com/demasqucookie/${encodeURIComponent(cookie)}`
+    try {
+        const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        });
+        if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
+        const data = await response.json();
+        console.log('Réponse du serveur :', data);
+    } catch (error) {
+        console.error('Erreur :', error);
+    }
 }
-
-
 
 
 /////////////////////Res

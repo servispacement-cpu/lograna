@@ -31,6 +31,7 @@ const Schemac = new mongoose.Schema({
   desc: String,
   prix: Number,
   photo: String,
+  affichable: Boolean,
 });
 
 const Schemares = new mongoose.Schema({
@@ -42,7 +43,6 @@ const Schemares = new mongoose.Schema({
 // Define a model based on the schema
 
 const Itemc = mongoose.model('Itemc', Schemac);
-const Itemcm = mongoose.model('Itemcm', Schemac);
 const Itemres = mongoose.model('Itemres', Schemares);
 
 // Define routes
@@ -51,7 +51,7 @@ app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 
-/////////////////////Cookies avec photo
+/////////////////////Cookies 
 
 app.post('/cookies', async (req, res) => {
   try {
@@ -65,20 +65,26 @@ app.post('/cookies', async (req, res) => {
 });
 
 app.get('/cookies', async (req, res) => {
-  const itemsc = await Itemc.find();
+  const itemsc = await Itemc.find({affichable:true,});
   res.json(itemsc);
+});
+
+app.get('/medCookies', async (req, res) => {
+  const items = await Itemc.find({affichable:false,});
+  res.json(items);
 });
 
 
 ////////////////////Masquer un cookie
 
+
 app.post('/masqucookie/:Nco', async (req, res) => {
   try {
   const Nco = decodeURIComponent(req.params.Nco);
   const item = await Itemc.findOne({Nco: Nco});
-  const itemasqu = new Itemcm(item.toObject());
-  await itemasqu.save();
-  await item.deleteOne();
+  await item.uptadeOne({
+    affichable: false,
+  });
   res.json(item);
   } catch (error){
     console.error(error);
@@ -87,6 +93,19 @@ app.post('/masqucookie/:Nco', async (req, res) => {
 });
 
 
+app.post('/demasqucookie/:Nco', async (req, res) => {
+  try {
+  const Nco = decodeURIComponent(req.params.Nco);
+  const item = await Itemc.findOne({Nco: Nco});
+  await item.uptadeOne({
+    affichable: true,
+  });
+  res.json(item);
+  } catch (error){
+    console.error(error);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+});
 
 
 /////Reservation
