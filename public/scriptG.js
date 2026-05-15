@@ -26,7 +26,7 @@ function createCookier(event){
 }
 
 async function post(cookie){
-    const invalidNco = (await getCo()).some(c => c.Nco === cookie.Nco);
+    const invalidNco = (await getCo('https://lograna.onrender.com/cookies')).some(c => c.Nco === cookie.Nco);
     if (invalidNco){alert("Ce nom de cookie existe déjà. Veuillez en saisir un autre."); return;}
     const url = 'https://lograna.onrender.com/cookies';
     try {
@@ -106,24 +106,6 @@ async function affMasquCookies(){
 affMasquCookies();
 
 
-
-async function getCo(url){
-        try {
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' },
-        });
-
-        if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
-        const data = await response.json();
-        console.log(data);
-        return (data);
-    } catch (error) {
-        console.error('Erreur :', error);
-        throw error;
-    } 
-}
-
 /////requetes
 
 async function masquerCookie(){
@@ -160,7 +142,22 @@ async function demasquerCookie(){
     }
 }
 
+async function getCo(url){
+        try {
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+        });
 
+        if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
+        const data = await response.json();
+        console.log(data);
+        return (data);
+    } catch (error) {
+        console.error('Erreur :', error);
+        throw error;
+    } 
+}
 /////////////////////Res
 
 async function getRes(){
