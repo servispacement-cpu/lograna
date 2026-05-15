@@ -37,14 +37,13 @@ const Schemacr = new mongoose.Schema({
   Nco: String,
   desc: String,
   prix: Number,
-  photo: String,
 });
 
 // Define a model based on the schema
 
 const Itemc = mongoose.model('Itemc', Schemac);
 const Itemcr = mongoose.model('Itemcr', Schemacr);
- 
+const Itemcm = mongoose.model('Itemcm', Schemac);
 
 // Define routes
 app.use(cors()); 
@@ -87,6 +86,21 @@ app.post('/cookiesr', async (req, res) => {
 app.get('/cookiesr', async (req, res) => {
   const itemscr = await Itemcr.find();
   res.json(itemscr);
+});
+
+////////////////////Masquer un cookie
+
+app.post('/masqucookie/:Nco', async (req, res) => {
+  try {
+  const Nco = decodeURIComponent(req.params.Nco);
+  const item = await Itemc.findOne({Nco: Nco});
+  const itemasqu = new Itemcm(item.toObject());
+  await itemasqu.save();
+  await item.deleteOne();
+  } catch (error){
+    console.error(error);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
 });
 
 
