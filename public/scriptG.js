@@ -94,12 +94,12 @@ async function afficherCookies(){
 afficherCookies();
 
 async function affMasquCookies(){
-    const dataCo = await getCo('https://lograna.onrender.com/medCookies')
-    for (let i = 0; i<dataCo.length ; i++){
-        const bt = document.createElement("button");
-        bt.textContent = "Démasquer " + data[i].Nco;
-        bt.onclick = demasquerCookie;
-        document.getElementById("masq").appendChild(bt)
+    const cookies = await getCo('https://lograna.onrender.com/medCookies')
+    for (let i = 0; i<cookies.length ; i++){
+        const opt = document.createElement("option");
+        opt.textContent = cookies[i].Nco;
+        opt.value = cookies[i].Nco
+        document.getElementById("seldmas").appendChild(opt);
     }
 }
 
@@ -127,7 +127,7 @@ async function masquerCookie(){
 
 
 async function demasquerCookie(){
-    const cookie = document.getElementById("selmas").value;
+    const cookie = document.getElementById("seldmas").value;
     const url = `https://lograna.onrender.com/demasqucookie/${encodeURIComponent(cookie)}`
     try {
         const response = await fetch(url, {
