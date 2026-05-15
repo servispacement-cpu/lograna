@@ -111,7 +111,7 @@ afficherCookies();
 
 
 
-function masquerCookie(){
+async function masquerCookie(){
     const cookie = document.getElementById("selmas").value;
     const url = `https://lograna.onrender.com/masqucookie/${encodeURIComponent(cookie)}`
     try {

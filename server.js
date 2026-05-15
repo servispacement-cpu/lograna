@@ -97,6 +97,7 @@ app.post('/masqucookie/:Nco', async (req, res) => {
   const itemasqu = new Itemcm(item.toObject());
   await itemasqu.save();
   await item.deleteOne();
+  res.json(item);
   } catch (error){
     console.error(error);
     res.status(500).json({ error: "Erreur serveur" });
