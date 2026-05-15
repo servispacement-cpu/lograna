@@ -26,23 +26,16 @@ mongoose.connect('mongodb://servispacement_db_user:test@ac-wrbrxfi-shard-00-00.r
 // Define a schema for our data
 
 const Schemac = new mongoose.Schema({
+  cat: String,
   Nco: String,
   desc: String,
   prix: Number,
   photo: String,
 });
 
-
-const Schemacr = new mongoose.Schema({
-  Nco: String,
-  desc: String,
-  prix: Number,
-});
-
 // Define a model based on the schema
 
 const Itemc = mongoose.model('Itemc', Schemac);
-const Itemcr = mongoose.model('Itemcr', Schemacr);
 const Itemcm = mongoose.model('Itemcm', Schemac);
 
 // Define routes
@@ -69,24 +62,6 @@ app.get('/cookies', async (req, res) => {
   res.json(itemsc);
 });
 
-/////////////////////Cookies sans photo
-
-app.post('/cookiesr', async (req, res) => {
-  try {
-  const item = new Itemcr(req.body); 
-  await item.save();
-  res.json(item);
-  } catch (error){
-    console.error(error);
-    res.status(500).json({ error: "Erreur serveur" });
-  }
-});
-
-
-app.get('/cookiesr', async (req, res) => {
-  const itemscr = await Itemcr.find();
-  res.json(itemscr);
-});
 
 ////////////////////Masquer un cookie
 

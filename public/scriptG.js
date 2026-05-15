@@ -2,26 +2,29 @@
 
 function createCookie(event){
     const cookie = {
+        cat: document.getElementById("cat").value,
         Nco : document.getElementById("Ncookie").value,
         desc : document.getElementById("descCookie").value,
         prix : document.getElementById("pCookie").value,
         photo: document.getElementById("canvas").toDataURL("image/jpeg", 0.5),
     };
     event.preventDefault();
-    post(cookie, 'https://lograna.onrender.com/cookies');
+    post(cookie);
 }
 
 function createCookier(event){
     const cookie = {
+        cat: document.getElementById("cat").value,
         Nco : document.getElementById("Ncookie").value,
         desc : document.getElementById("descCookie").value,
         prix : document.getElementById("pCookie").value,
     };
     event.preventDefault();
-    post(cookie, 'https://lograna.onrender.com/cookiesr');
+    post(cookie);
 }
 
-async function post(cookie, url){
+async function post(cookie){
+    const url = 'https://lograna.onrender.com/cookies';
     try {
         const response = await fetch(url, {
             method: 'POST',
