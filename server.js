@@ -82,7 +82,7 @@ app.post('/masqucookie/:Nco', async (req, res) => {
   try {
   const Nco = decodeURIComponent(req.params.Nco);
   const item = await Itemc.findOne({Nco: Nco});
-  await item.uptateOne({
+  await item.updateOne({
     affichable: false,
   });
   res.json(item);
@@ -97,7 +97,7 @@ app.post('/demasqucookie/:Nco', async (req, res) => {
   try {
   const Nco = decodeURIComponent(req.params.Nco);
   const item = await Itemc.findOne({Nco: Nco});
-  await item.uptateOne({
+  await item.updateOne({
     affichable: true,
   });
   res.json(item);
