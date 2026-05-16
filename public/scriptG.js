@@ -82,43 +82,53 @@ function photo(){
 
 //////////////////////////////////////////////////Masq cookies
 
-async function afficherCookies(){
-    const cookies = await getCo('https://lograna.onrender.com/cookies')
-    for (let i = 0; i<cookies.length; i++){
-        const opt = document.createElement("option");
-        opt.textContent = cookies[i].Nco;
-        opt.value = cookies[i].Nco
-        document.getElementById("selmas").appendChild(opt);
+async function affMasquCookies(url, par, d){
+    const cookies = await getCo(url)
+    if (d){
+        for (let i = 0 ; i<cookies.length ; i++){
+            const opt = document.createElement("button")
+            opt.textContent = "Démasquer " + cookies[i].Nco;
+            opt.value = cookies[i].Nco
+            opt.id = cookies[i].Nco;
+            opt.onclick = function(event){masquerCookie('https://lograna.onrender.com/demasqucookie' , opt.id);   
+                event.preventDefault();};
+            document.getElementById(par).appendChild(opt);
+        }
+    } else {
+        for (let i = 0; i<cookies.length ; i++){
+            const opt = document.createElement("option");
+            opt.textContent = cookies[i].Nco;
+            opt.value = cookies[i].Nco
+            document.getElementById(par).appendChild(opt);
+        }
     }
 }
-afficherCookies();
 
-async function affMasquCookies(){
-    const cookies = await getCo('https://lograna.onrender.com/medCookies')
-    for (let i = 0; i<cookies.length ; i++){
-        const opt = document.createElement("option");
-        opt.textContent = cookies[i].Nco;
-        opt.value = cookies[i].Nco
-        document.getElementById("seldmas").appendChild(opt);
-    }
-}
-
-affMasquCookies();
-
+affMasquCookies('https://lograna.onrender.com/medCookies', "seldmas", true);
+affMasquCookies('https://lograna.onrender.com/Cookies', "selmas");
 
 /////requetes
 
-async function masquerCookie(){
-    const cookie = document.getElementById("selmas").value;
-    const url = `https://lograna.onrender.com/masqucookie/${encodeURIComponent(cookie)}`
+document.getElementById("masqc").onclick = function(){masquerCookie('https://lograna.onrender.com/masqucookie' , "selmas");};
+
+
+async function masquerCookie(url, sel){
+    const cookie = document.getElementById(sel).value;
+    const furl = `${url}/${encodeURIComponent(cookie)}`;
     try {
-        const response = await fetch(url, {
+        const response = await fetch(furl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         });
         if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
         const data = await response.json();
-        if (data){alert("Votre cookie a bien été masqué")}
+        if (data){
+            if (sel === "selmas"){
+                alert("Votre cookie a bien été masqué. Veuillez raffraichir la page.")
+            } else {
+                alert("Votre cookie a bien été démasqué. Veuillez raffraichir la page.")
+            }
+        } 
         console.log('Réponse du serveur :', data);
     } catch (error) {
         console.error('Erreur :', error);
@@ -126,24 +136,7 @@ async function masquerCookie(){
 
 }   
 
-
-async function demasquerCookie(){
-    const cookie = document.getElementById("seldmas").value;
-    const url = `https://lograna.onrender.com/demasqucookie/${encodeURIComponent(cookie)}`
-    try {
-        const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        });
-        if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
-        const data = await response.json();
-        if (data){alert("Votre cookie a bien été démasqué")}
-        console.log('Réponse du serveur :', data);
-    } catch (error) {
-        console.error('Erreur :', error);
-    }
-}
-
+//pour les masqu/verif Nco
 async function getCo(url){
         try {
         const response = await fetch(url, {
