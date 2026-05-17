@@ -126,13 +126,14 @@ app.get('/res', async (req, res) => {
   res.json(itemsc);
 });
 
-app.delete('/supres', async (req, res) => {
+app.delete('/supres/:id', async (req, res) => {
   try {
-  const item = await Itemres.findByIdAndDelete(req.body); 
-  res.json(item);
-    if (!item) {
+  const item = await Itemres.findOne({_id: req.params.id}); 
+  if (!item) {
     return res.status(404).json({ message: "Item not found" });
   }
+  await item.deleteOne();
+  res.json(item);
   } catch (error){
     console.error(error);
     res.status(500).json({ error: "Erreur serveur" });

@@ -198,13 +198,12 @@ async function afficherRes(){
 afficherRes();
 
 
-async function supres(res){
-    const url = 'https://lograna.onrender.com/supres';
+async function supres(resid){
+    const url = 'https://lograna.onrender.com/supres/:resid';
     try {
         const response = await fetch(url, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(res),
         });
 
         if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
