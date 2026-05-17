@@ -199,7 +199,7 @@ afficherRes();
 
 
 async function supres(resid){
-    const url = 'https://lograna.onrender.com/supres/:resid';
+    const url = `https://lograna.onrender.com/supres/${resid}`;
     try {
         const response = await fetch(url, {
             method: 'DELETE',
