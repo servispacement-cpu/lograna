@@ -128,7 +128,7 @@ app.get('/res', async (req, res) => {
 
 app.delete('/supres', async (req, res) => {
   try {
-  const item = await Itemres.findByIdAndDelete(req.body.id); 
+  const item = await Itemres.findByIdAndDelete(req.body); 
   res.json(item);
     if (!item) {
     return res.status(404).json({ message: "Item not found" });

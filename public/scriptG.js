@@ -187,7 +187,7 @@ async function afficherRes(){
     adresse.textContent = "Adresse de livraison : " + res[i].adresse;
     cookies.textContent = "Contenu de la commande : " + res[i].cookies;
     bt.textContent = "Livraison terminée";
-    bt.onclick = function(){supres(res);};
+    bt.onclick = function(){supres(res[i]._id);};
     par.appendChild(nom);
     par.appendChild(adresse);
     par.appendChild(cookies);
