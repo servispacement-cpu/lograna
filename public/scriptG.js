@@ -181,16 +181,37 @@ async function afficherRes(){
     const nom = document.createElement("h3");
     const adresse = document.createElement("h3");
     const cookies = document.createElement("h3");
+    const bt = document.createElement("button");
     const hr = document.createElement("hr");
     nom.textContent = "Nom du client : " + res[i].nom;
     adresse.textContent = "Adresse de livraison : " + res[i].adresse;
     cookies.textContent = "Contenu de la commande : " + res[i].cookies;
+    bt.textContent = "Livraison terminée";
+    bt.onclick = function(){supres(res);};
     par.appendChild(nom);
     par.appendChild(adresse);
     par.appendChild(cookies);
     par.appendChild(hr);
     }
 }
-
-
 afficherRes();
+
+
+async function supres(res){
+    const url = 'https://lograna.onrender.com/supres';
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(res),
+        });
+
+        if (!response.ok) throw new Error(`Erreur HTTP : ${response.status}`);
+
+        const data = await response.json();
+        if (data){alert("La reservation a été livrée, par conséquent elle est suprimmée.")}
+        console.log('Reservation suprimée :', data);
+    } catch (error) {
+        console.error('Erreur :', error);
+    }
+}

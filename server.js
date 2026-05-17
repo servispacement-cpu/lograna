@@ -69,13 +69,9 @@ app.get('/cookies', async (req, res) => {
   res.json(itemsc);
 });
 
-app.get('/medCookies', async (req, res) => {
-  const items = await Itemc.find({affichable:false,});
-  res.json(items);
-});
 
 
-////////////////////Masquer un cookie
+////////////////////(Dé)Masquer un cookie
 
 
 app.post('/masqucookie/:Nco', async (req, res) => {
@@ -107,6 +103,10 @@ app.post('/demasqucookie/:Nco', async (req, res) => {
   }
 });
 
+app.get('/medCookies', async (req, res) => {
+  const items = await Itemc.find({affichable:false,});
+  res.json(items);
+});
 
 /////Reservation
 app.post('/res', async (req, res) => {
@@ -126,6 +126,18 @@ app.get('/res', async (req, res) => {
   res.json(itemsc);
 });
 
+app.post('/supres', async (req, res) => {
+  try {
+  const item = await Itemres.findByIdAndDelete(req.body.id); 
+  res.json(item);
+    if (!item) {
+    return res.status(404).json({ message: "Item not found" });
+  }
+  } catch (error){
+    console.error(error);
+    res.status(500).json({ error: "Erreur serveur" });
+  }
+});
 
 app.use(express.static("public"));
 
