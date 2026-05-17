@@ -126,7 +126,7 @@ app.get('/res', async (req, res) => {
   res.json(itemsc);
 });
 
-app.post('/supres', async (req, res) => {
+app.delete('/supres', async (req, res) => {
   try {
   const item = await Itemres.findByIdAndDelete(req.body.id); 
   res.json(item);
