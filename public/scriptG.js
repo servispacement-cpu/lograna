@@ -191,6 +191,7 @@ async function afficherRes(){
     par.appendChild(nom);
     par.appendChild(adresse);
     par.appendChild(cookies);
+    par.appendChild(bt);
     par.appendChild(hr);
     }
 }
@@ -201,7 +202,7 @@ async function supres(res){
     const url = 'https://lograna.onrender.com/supres';
     try {
         const response = await fetch(url, {
-            method: 'POST',
+            method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(res),
         });
